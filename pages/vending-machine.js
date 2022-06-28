@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./../styles/vendingMachine.module.css";
 import "bulma/css/bulma.css";
 import Head from "next/head";
 import Web3 from "web3";
 
 function vendingMachine() {
+  const [error, setError] = useState("");
   let web3;
   const connectWalletHandler = async () => {
     if (
@@ -18,7 +19,7 @@ function vendingMachine() {
         });
         console.log(accounts);
       } catch (error) {
-        console.log(error);
+        setError(error.message);
       }
     } else {
       console.log("Connect to metamask");
@@ -48,6 +49,11 @@ function vendingMachine() {
       <section>
         <div className='container'>
           <p>Placeholder text</p>
+        </div>
+      </section>
+      <section>
+        <div className='container has-text-danger'>
+          <p>{error}</p>
         </div>
       </section>
     </div>
